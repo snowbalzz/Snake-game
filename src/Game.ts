@@ -27,8 +27,11 @@ class Game {
 
         this.teleX = 0;
         this.teleY = 0;
-        this.scaleOfSnake = 0.05;
+        this.scaleOfSnake = 0.02;
         this.tail = [];
+        
+        console.log(this.gridNum());
+        
 
         for (let i = 0; i < 5; i++) {
             this.tail.push(new Snake(this.canvas.width/2 - i * this.scaleOfSnake*this.canvas.width, this.canvas.height/2, this.scaleOfSnake, 'grey'));
@@ -51,7 +54,7 @@ class Game {
         this.eatingApple();
         // this.selfCollision();
         
-        if (this.counter % 5 === 0) {
+        if (this.counter % 3 === 0) {
         this.tailMovePrototype();
         }
             
@@ -129,7 +132,7 @@ class Game {
             this.keyPressed = 'right';
             this.teleX = this.canvas.width * this.scaleOfSnake; 
             this.teleY = 0;
-        }
+        } 
         if (this.keyboard.isKeyDown(KeyboardListener.KEY_LEFT) && this.keyPressed != 'right') {
             this.keyPressed = 'left';
             this.teleX = -this.canvas.width * this.scaleOfSnake;
@@ -162,12 +165,18 @@ class Game {
     }
 
     private spawnEnemy = () => {
-        if () {
-
-        } else if () {
-             
-        }
-        this.enemy = new Enemy(Math.floor(Math.random() * this.canvas.height ), Math.floor(Math.random() * this.canvas.width + 100), this.scaleOfSnake, 'red');
-        
+        this.enemy = new Enemy( 
+            Math.ceil(this.randomNumber(1, this.gridNum())) * (this.scaleOfSnake * this.canvas.width), 
+            Math.ceil(this.randomNumber(1, this.gridNum())) * (this.scaleOfSnake * this.canvas.height), 
+            this.scaleOfSnake, 
+            'red');
     }
+
+    private gridNum = () => {
+        return  (this.canvas.width / (this.scaleOfSnake * this.canvas.width)) - 1; 
+    }
+
+    private randomNumber = (min:number, max:number) =>{ 
+        return Math.random() * (max - min) + min;
+    } 
 }

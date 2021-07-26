@@ -23,6 +23,7 @@ class Snake {
     let posY = this.yPos;
     ctx.fillStyle = this.color;
     ctx.fillRect(this.xPos, posY, this.scale*canvas.width, this.scale*canvas.height);
+    
   }
 
   
